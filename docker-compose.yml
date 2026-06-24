@@ -25,6 +25,7 @@ services:
       dockerfile: ./platform/wab/tools/docker-dev/Dockerfile.dev.aio
     command: # Override the default dockerfile startup command here for debugging purpose
       - |
+        git config --global --add safe.directory /plasmic && \
         jq '(.host = "plasmic-db") | (.password //= "SEKRET")' ormconfig.json > tmp.json && mv tmp.json ormconfig.json && \
         yarn typeorm migration:run && \
         yarn seed && \
