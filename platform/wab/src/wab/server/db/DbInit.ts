@@ -42,6 +42,13 @@ async function main() {
   const config = loadConfig();
   const con = await ensureDbConnection(config.databaseUri, "default");
   await con.transaction(async (em) => {
+    const [{ count }] = await em.query(
+      `SELECT count(*)::int AS count FROM "user"`
+    );
+    if (count > 0) {
+      logger().info("Database already initialized; skipping seed.");
+      return;
+    }
     await initDb(em);
     await seedTestDb(em);
     logger().info("done");
