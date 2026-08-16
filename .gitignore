@@ -46,3 +46,10 @@ dist/
 # Playwright test results
 test-results/
 playwright-report/
+
+# Personal IDE / agent configuration
+.cursor/
+.sops.yaml
+AGENTS.md
+GEMINI.md
+CORTEX_CONTEXT.md
